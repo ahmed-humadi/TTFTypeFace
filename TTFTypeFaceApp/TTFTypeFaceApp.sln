@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTFTypeFace", "TTFTypeFace\TTFTypeFace.csproj", "{ED826B26-021E-43C6-B04B-550D0ED13F75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C916340C-7AD6-44A6-8654-08604AB30368}
+	EndGlobalSection
+EndGlobal
