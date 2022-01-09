@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.IO;
 namespace TTFTypeFace
 {
     /// <summary>
@@ -23,6 +23,22 @@ namespace TTFTypeFace
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if(openFileDialog.ShowDialog() == true)
+            {
+                using(FileStream stream = new FileStream(openFileDialog.FileName,FileMode.Open))
+                {
+                    byte[] data = new byte[stream.Length];
+                    stream.Read(data);
+                    TrueTypeFont.TTFTypeFace tTFTypeFace = new TrueTypeFont.TTFTypeFace(data);
+
+                    tTFTypeFace.Dispose();
+                }
+            }
         }
     }
 }

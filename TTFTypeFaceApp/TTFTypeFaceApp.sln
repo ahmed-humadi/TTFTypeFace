@@ -3,13 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTFTypeFace", "TTFTypeFace\TTFTypeFace.csproj", "{ED826B26-021E-43C6-B04B-550D0ED13F75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTFTypeFaceWPF", "TTFTypeFace\TTFTypeFaceWPF.csproj", "{ED826B26-021E-43C6-B04B-550D0ED13F75}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTypeFont", "TrueTypeFont\TrueTypeFont.csproj", "{79186A73-569D-40B7-BCBD-F354876B67CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTypeFont", "TrueTypeFont\TrueTypeFont.csproj", "{79186A73-569D-40B7-BCBD-F354876B67CE}"
 EndProject
-=======
->>>>>>> 0e57766fd94806f7bde11c8ffd0934df22e57c07
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,13 +17,10 @@ Global
 		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED826B26-021E-43C6-B04B-550D0ED13F75}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{79186A73-569D-40B7-BCBD-F354876B67CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79186A73-569D-40B7-BCBD-F354876B67CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79186A73-569D-40B7-BCBD-F354876B67CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79186A73-569D-40B7-BCBD-F354876B67CE}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
->>>>>>> 0e57766fd94806f7bde11c8ffd0934df22e57c07
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

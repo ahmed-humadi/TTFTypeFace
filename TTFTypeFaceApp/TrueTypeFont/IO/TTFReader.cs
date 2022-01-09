@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 namespace TrueTypeFont.IO
 {
-    public class TTFReader
+    public class TTFReader : IDisposable
     {
         private BinaryReader _binaryReader;
         public long Position { get => this._binaryReader.BaseStream.Position; }

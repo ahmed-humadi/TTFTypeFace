@@ -3,10 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:customPanel="clr-namespace:TrueTypeFont;assembly=TrueTypeFont"
+
         xmlns:local="clr-namespace:TTFTypeFace"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Height="30" Grid.Row="0">
+            <Button Width="150" HorizontalAlignment="Left"
+                    Height="30" Content="Add" Click="Button_Click"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Height="400">
+            <customPanel:CustomPanel x:Name="CustomPanel">
+                
+            </customPanel:CustomPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

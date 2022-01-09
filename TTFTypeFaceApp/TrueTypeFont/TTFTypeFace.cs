@@ -10,7 +10,7 @@ using TrueTypeFont.IO;
 using TrueTypeFont.TTFTables;
 namespace TrueTypeFont
 {
-    public class TTFTypeFace
+    public class TTFTypeFace : IDisposable
     {
         private string[] _cMapSubtable;
         public string[] CMapSubtable
@@ -397,6 +397,12 @@ namespace TrueTypeFont
                     this.CatchedGlyphs.Add(glyphIndex, pathGeometry);
                 return pathGeometry;
             }
+        }
+
+        public void Dispose()
+        {
+            if(this._ttfReader is not null)
+                this._ttfReader.Dispose();
         }
     }
 }
