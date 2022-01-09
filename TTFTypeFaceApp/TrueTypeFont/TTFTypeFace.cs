@@ -18,6 +18,11 @@ namespace TrueTypeFont
             get { return _cMapSubtable; }
             set { _cMapSubtable = value; }
         }
+        public ushort NumberOfGlyphs
+        {
+            get { return _tTFloca.NumGlyphs; }
+        }
+        public uint MagicNumber => _tTFHeader.MagicNumber;
         private Dictionary<int, ushort> _uint16charCode2GID;
         // lazy initialization
         public Dictionary<int, ushort> Uint16charCode2GID
@@ -269,7 +274,7 @@ namespace TrueTypeFont
             PathFigure pathFigure = null;
             if (glyph is not null)
             {
-                double scale = 1.0 / (double)this._unitsPerEm;
+                double scale = 20.0 / (double)this._unitsPerEm;
                 var p = 0;
                 var c = 0;
                 var first = 0;

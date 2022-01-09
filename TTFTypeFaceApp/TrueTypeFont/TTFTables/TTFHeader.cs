@@ -71,6 +71,14 @@ namespace TrueTypeFont.TTFTables
             get { return _flags; }
             set { _flags = value; }
         }
+        private uint _magicNumber;
+
+        public uint MagicNumber
+        {
+            get { return _magicNumber; }
+            set { _magicNumber = value; }
+        }
+
         private void InitialComponents()
         {
             var majorVersion = _reader.GetFixed();
@@ -79,7 +87,7 @@ namespace TrueTypeFont.TTFTables
             //MessageBox.Show(fontReVersion.ToString());
             var checksumAdjustment = _reader.GetUInt32();
             //MessageBox.Show(checksumAdjustment.ToString());
-            var magicNumber = _reader.GetUInt32();
+            _magicNumber = _reader.GetUInt32();
             //MessageBox.Show(magicNumber.ToString(),"magicNumber");
             this._flags = _reader.GetUInt16();
             //MessageBox.Show(Convert.ToString(flags,toBase:2));
