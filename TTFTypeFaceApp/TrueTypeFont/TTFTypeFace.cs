@@ -198,56 +198,60 @@ namespace TrueTypeFont
                 Dictionary<string, long> tablesOffset = new Dictionary<string, long>();
                 var scale = this.TtfReader.GetUInt32(); // scalarType
                 var numTables = this.TtfReader.GetUInt16();
-                var g = this.TtfReader.GetUInt16(); // searchRange
-                var d = this.TtfReader.GetUInt16(); // entrySelector
-                var eh = this.TtfReader.GetUInt16(); // rangeShift
-                for (int i = 0; i < numTables; i++)
+                if (numTables >= 9)
                 {
-                    string tag = this.TtfReader.GetSting(4);
-                    var checksum = this.TtfReader.GetUInt32();
-                    var offset = this.TtfReader.GetUInt32();
-                    var length = this.TtfReader.GetUInt32();
-                    tablesOffset.Add(tag, offset);
+                    var g = this.TtfReader.GetUInt16(); // searchRange
+                    var d = this.TtfReader.GetUInt16(); // entrySelector
+                    var eh = this.TtfReader.GetUInt16(); // rangeShift
+                    for (int i = 0; i < numTables; i++)
+                    {
+                        string tag = this.TtfReader.GetSting(4);
+                        var checksum = this.TtfReader.GetUInt32();
+                        var offset = this.TtfReader.GetUInt32();
+                        var length = this.TtfReader.GetUInt32();
+                        tablesOffset.Add(tag, offset);
+                    }
+                    if (tablesOffset.ContainsKey("head"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["head"]);
+                        this._tTFHeader = new TTFHeader(this.TtfReader);
+                        this._unitsPerEm = this._tTFHeader.UnitsPerEm;
+                    }
+                    if (tablesOffset.ContainsKey("maxp"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["maxp"]);
+                        this._tTFmaxp = new TTFmaxpTable(this.TtfReader);
+                    }
+                    if (tablesOffset.ContainsKey("cmap"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["cmap"]);
+                        this._tTFCMap = new TTFCMapTable(this.TtfReader);
+                        this._cMapSubtable = this._tTFCMap.Subtables;
+                    }
+                    if (tablesOffset.ContainsKey("loca"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["loca"]);
+                        this._tTFloca = new TTFlocaTable(this.TtfReader, _tTFmaxp.NumGlyphs, _tTFHeader.IndexToLocFormat);
+                    }
+                    if (tablesOffset.ContainsKey("glyf"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["glyf"]);
+                        this._tTFglyf = new TTFglyphTable(this.TtfReader, tablesOffset["glyf"], _tTFHeader.IndexToLocFormat, _tTFloca);
+                        this._tTFglyf.TTFHeader = this._tTFHeader;
+                    }
+                    if (tablesOffset.ContainsKey("hhea"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["hhea"]);
+                        this._tTFhhea = new TTFhheaTable(this.TtfReader);
+                    }
+                    if (tablesOffset.ContainsKey("hmtx"))
+                    {
+                        this.TtfReader.Seek(tablesOffset["hmtx"]);
+                        this._tTFhmtx = new TTFhmtxTable(this.TtfReader, this._tTFhhea.NumberOfHMetrics, this._tTFmaxp.NumGlyphs, this._unitsPerEm);
+                    }
                 }
-                if (tablesOffset.ContainsKey("head"))
-                {
-                    this.TtfReader.Seek(tablesOffset["head"]);
-                    this._tTFHeader = new TTFHeader(this.TtfReader);
-                    this._unitsPerEm = this._tTFHeader.UnitsPerEm;
-                }
-                if (tablesOffset.ContainsKey("maxp"))
-                {
-                    this.TtfReader.Seek(tablesOffset["maxp"]);
-                    this._tTFmaxp = new TTFmaxpTable(this.TtfReader);
-                }
-                if (tablesOffset.ContainsKey("cmap"))
-                {
-                    this.TtfReader.Seek(tablesOffset["cmap"]);
-                    this._tTFCMap = new TTFCMapTable(this.TtfReader);
-                    this._cMapSubtable = this._tTFCMap.Subtables;
-                }
-                if (tablesOffset.ContainsKey("loca"))
-                {
-                    this.TtfReader.Seek(tablesOffset["loca"]);
-                    this._tTFloca = new TTFlocaTable(this.TtfReader, _tTFmaxp.NumGlyphs, _tTFHeader.IndexToLocFormat);
-                }
-                if (tablesOffset.ContainsKey("glyf"))
-                {
-                    this.TtfReader.Seek(tablesOffset["glyf"]);
-                    this._tTFglyf = new TTFglyphTable(this.TtfReader, tablesOffset["glyf"], _tTFHeader.IndexToLocFormat, _tTFloca);
-                    this._tTFglyf.TTFHeader = this._tTFHeader;
-                }
-                if (tablesOffset.ContainsKey("hhea"))
-                {
-                    this.TtfReader.Seek(tablesOffset["hhea"]);
-                    this._tTFhhea = new TTFhheaTable(this.TtfReader);
-                }
-                if (tablesOffset.ContainsKey("hmtx"))
-                {
-                    this.TtfReader.Seek(tablesOffset["hmtx"]);
-                    this._tTFhmtx = new TTFhmtxTable(this.TtfReader, this._tTFhhea.NumberOfHMetrics, this._tTFmaxp.NumGlyphs, this._unitsPerEm);
-                }
-
+                else
+                { this.TtfReader.Seek(0); throw new Exception(); }
             }
         }
         private Dictionary<ushort, PathGeometry> _catchedGlyphs;

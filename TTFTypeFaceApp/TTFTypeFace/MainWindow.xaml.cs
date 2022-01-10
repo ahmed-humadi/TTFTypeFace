@@ -36,9 +36,9 @@ namespace TTFTypeFace
                 {
                     byte[] data = new byte[stream.Length];
                     stream.Read(data);
-                    TrueTypeFont.TTFTypeFace tTFTypeFace = new TrueTypeFont.TTFTypeFace(data);
-                    if (tTFTypeFace.MagicNumber == 0x5F0F3CF5)
+                    try
                     {
+                        TrueTypeFont.TTFTypeFace tTFTypeFace = new TrueTypeFont.TTFTypeFace(data);
                         double x = 0; double y = CustomPanel.ActualHeight - 30;
                         for (ushort i = 0; i < tTFTypeFace.NumberOfGlyphs; i++)
                         {
@@ -55,10 +55,12 @@ namespace TTFTypeFace
                                 dc.DrawGeometry(Brushes.Black, null, glyph);
                             }
                         }
+                        tTFTypeFace.Dispose();
                     }
-                    else
-                        MessageBox.Show("is not True Type Font");
-                    tTFTypeFace.Dispose();
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("this is not true type font");
+                    }
                 }
             }
         }
